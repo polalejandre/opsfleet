@@ -9,6 +9,7 @@
 ## Notes
 - Ignoring environments in vars to make things easier
 - The code is not 100% tested, is an approximation, some values are random, like instance types, sizes, etc
+- Explanation of pod deployment doesn't consider any automation or methodology to deploy into the cluster
 
 ## Usage
 
@@ -26,7 +27,7 @@ To use this Terraform repository, follow these steps:
     cd opsfleet
     ```
 
-3. Update the necessary variables in the `variables.tf` file to match your desired configuration.
+3. Update the necessary variables in the `terraform.tfvars` file to match your desired configuration.
 
 4. Initialize the Terraform workspace:
 
@@ -46,31 +47,21 @@ To use this Terraform repository, follow these steps:
     terraform apply
     ```
 
-7. Once the cluster is created, you can access it by following these steps:
-
-    - Connect to the VPN using the VPN client provided by your company.
-    - Obtain the Security Group ID of the VPN.
-    - Update the `eks_cluster.tf` file with the Security Group ID of the VPN.
-    - Apply the changes again:
-
-      ```bash
-      terraform apply
-      ```
-
-8. After successfully applying the changes, you can deploy pods or deployments on either x86 or Graviton instances inside the cluster. Here's an example of how to deploy a pod:
+7. After successfully applying the changes, you can deploy pods or deployments on either x86 or Graviton instances inside the cluster. Here's an example of how to deploy a pod:
 
     ```yaml
     apiVersion: v1
     kind: Pod
     metadata:
       name: my-pod
+      namespace: my-namespace
     spec:
       containers:
          - name: my-container
             image: nginx
     ```
 
-    Save the above YAML code in a file, for example `my-pod.yaml`. Then, apply the pod to the cluster:
+    Save the above YAML code in a file, for example `my-pod.yaml`. Assuming you've already set up the kubectl access to the cluster, apply the pod:
 
     ```bash
     kubectl apply -f my-pod.yaml
