@@ -9,3 +9,73 @@
 ## Notes
 - Ignoring environments in vars to make things easier
 - The code is not 100% tested, is an approximation, some values are random, like instance types, sizes, etc
+
+## Usage
+
+To use this Terraform repository, follow these steps:
+
+1. Clone the repository to your local machine:
+
+    ```bash
+    git clone https://github.com/pol/opsfleet.git
+    ```
+
+2. Change into the repository directory:
+
+    ```bash
+    cd opsfleet
+    ```
+
+3. Update the necessary variables in the `variables.tf` file to match your desired configuration.
+
+4. Initialize the Terraform workspace:
+
+    ```bash
+    terraform init
+    ```
+
+5. Review the planned changes:
+
+    ```bash
+    terraform plan
+    ```
+
+6. Apply the changes to create the EKS private cluster:
+
+    ```bash
+    terraform apply
+    ```
+
+7. Once the cluster is created, you can access it by following these steps:
+
+    - Connect to the VPN using the VPN client provided by your company.
+    - Obtain the Security Group ID of the VPN.
+    - Update the `eks_cluster.tf` file with the Security Group ID of the VPN.
+    - Apply the changes again:
+
+      ```bash
+      terraform apply
+      ```
+
+8. After successfully applying the changes, you can deploy pods or deployments on either x86 or Graviton instances inside the cluster. Here's an example of how to deploy a pod:
+
+    ```yaml
+    apiVersion: v1
+    kind: Pod
+    metadata:
+      name: my-pod
+    spec:
+      containers:
+         - name: my-container
+            image: nginx
+    ```
+
+    Save the above YAML code in a file, for example `my-pod.yaml`. Then, apply the pod to the cluster:
+
+    ```bash
+    kubectl apply -f my-pod.yaml
+    ```
+
+    The pod will be scheduled and run on either an x86 or Graviton instance based on the configuration of the cluster.
+
+Please note that the code provided is an approximation and may require further customization based on your specific requirements.
