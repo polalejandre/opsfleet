@@ -47,7 +47,7 @@ To use this Terraform repository, follow these steps:
     terraform apply
     ```
 
-7. After successfully applying the changes, you can deploy pods or deployments on either x86 or Graviton instances inside the cluster. Here's an example of how to deploy a pod:
+7. After successfully applying the changes, you can deploy pods or deployments on either x86 or Graviton instances inside the cluster. Here's a basic example of how to deploy a pod:
 
     ```yaml
     apiVersion: v1
