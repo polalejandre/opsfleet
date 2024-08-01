@@ -9,7 +9,7 @@
 ## Notes
 - Ignoring environments in vars to make things easier
 - The code is not 100% tested, is an approximation, some values are random, like instance types, sizes, etc
-- Explanation of pod deployment doesn't consider any automation or methodology to deploy into the cluster
+- Explanation of pod deployment is really simple and doesn't consider any automation or methodology to deploy into the cluster
 
 ## Usage
 
